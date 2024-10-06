@@ -19,7 +19,7 @@ WORKDIR=${SRCDIR:-/src}
 
 SPEC_FILE=${4:-*.spec}
 
-python -m pip install --upgrade pip wheel setuptools
+python -m pip install --upgrade pip poetry pyinstaller
 
 #
 # In case the user specified a custom URL for PYPI, then use
@@ -42,13 +42,13 @@ fi
 cd $WORKDIR
 
 if [ -f $5 ]; then
-    pip install -r $5
+    poetry install
 fi # [ -f $5 ]
 
 
 
 # if [[ "$@" == "" ]]; then
-pyinstaller --clean -y --dist ./dist/windows --workpath /tmp $SPEC_FILE
+poetry run pyinstaller --clean -y --dist ./dist/windows --workpath /tmp $SPEC_FILE
 chown -R --reference=. ./dist/windows
 # else
     # sh -c "$@"

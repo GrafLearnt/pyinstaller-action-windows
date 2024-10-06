@@ -42,13 +42,13 @@ fi
 cd $WORKDIR
 
 if [ -f $5 ]; then
-    poetry install
+    python -m poetry install
 fi # [ -f $5 ]
 
 
 
 # if [[ "$@" == "" ]]; then
-poetry run pyinstaller --clean -y --dist ./dist/windows --workpath /tmp $SPEC_FILE
+python -m poetry run pyinstaller --clean -y --dist ./dist/windows --workpath /tmp $SPEC_FILE
 chown -R --reference=. ./dist/windows
 # else
     # sh -c "$@"
